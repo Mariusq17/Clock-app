@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+*, *::after, *::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+:root {
+  --size: 500px;
+}
+body {
+  background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+  background-size: 300%;
+  animation: bg 10s alternate infinite ease-in-out;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 3rem;
+  color: white;
+}
+@keyframes bg {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: bottom right;
+  }
+}
+.clock-container {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: relative;
+  /*top:50%;
+  left:50%;
+  transform: translate(-50%, -50%); */
+}
+.clock-container::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  z-index: -1;
+  background: radial-gradient(white 67%, rgb(31, 31, 31));
+  box-shadow:  0px 0px 150px rgba(0, 0, 0, 0.425);
+}
+.clock-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url(./clock-digits.png);
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.dot {
+  width: calc(.075 * var(--size));
+  height: calc(.075 * var(--size));
+  background: black;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 5;
+}
+.seconds, .minutes, .hours {
+  background: black;
+  position: absolute;
+  width: var(--width);
+  height: var(--height);
+  top: 50%;
+  left:50%;
+  translate: -50% -85%;
+  transform-origin: calc(var(--width) * .5) calc(var(--height) * .85);
+  border-radius: 5px;
+}
+.seconds {
+  --seconds: 0deg;
+  --width: calc(0.01 * var(--size));
+  --height: calc(0.35 * var(--size));
+  transform: rotate(var(--seconds));
+  background: red;
+}
+.minutes {
+  --minutes: 0deg;
+  --width: calc(0.0225 * var(--size));
+  --height: calc(0.30 * var(--size));
+  transform: rotate(var(--minutes));
+}
+.hours {
+  --hours: 0deg;
+  --width: calc(0.025 * var(--size));
+  --height: calc(0.2 * var(--size));
+  transform: rotate(var(--hours));
+}
+.clock-infos {
+  text-align: center;
+}
+@media (width < 950px) {
+  body {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+@media (width < 600px) {
+  :root {
+    --size: 300px;
+  }
+  body {
+    font-size: 2.5rem;
+  }
+}
+@media (width < 300px) {
+  :root {
+    --size: 200px;
+  }
+  body {
+    font-size: 2rem;
+  }
+}
